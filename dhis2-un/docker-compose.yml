@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgis/postgis:13-3.3   # ✅ Postgres with PostGIS
+    container_name: dhis2-db-un
+    environment:
+      POSTGRES_DB: un
+      POSTGRES_USER: dhis
+      POSTGRES_PASSWORD: dhis
+    volumes:
+      - dhis2_db_data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"   # host 5435 → container 5432
+
+  dhis2:
+    image: dhis2/core:2.40.0.1
+    container_name: dhis2-un
+    depends_on:
+      - db
+    environment:
+      DHIS2_HOME: /opt/dhis2
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: un
+      DB_USER: dhis
+      DB_PASSWORD: dhis
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dhis.conf:/opt/dhis2/dhis.conf
+      - dhis2_home:/opt/dhis2
+
+volumes:
+  dhis2_db_data:
+  dhis2_home:
+
