@@ -100,11 +100,9 @@ Navigate to Apps → Maintenance.
 
 Create a new Event Program:
 
-Name: Individual Health Info
+Name: Basic Individual Info Program
 
 Type: Event Program
-
-Add a Program Stage: Basic Info.
 
 Define Data Elements:
 
@@ -115,7 +113,7 @@ Age → Value type: Number
 Symptom → Value type: Text with option set of 
 Headache, Fever and Cough 
 
-Assign the program to an Org Unit.
+Assign the program to an Org Unit: PATH
 
 ----------------
 
